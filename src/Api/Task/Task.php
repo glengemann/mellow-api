@@ -10,6 +10,7 @@ use Mellow\Api\Task\Parameter\CreateParameters;
 use Mellow\Api\Task\Parameter\DeclineTaskParameters;
 use Mellow\Api\Task\Parameter\FilterParameters;
 use Mellow\Api\Task\Parameter\PayTaskParameters;
+use Mellow\Api\Task\Response\AcceptTaskResponse;
 use Mellow\Api\Task\Response\CreateTaskResponse;
 use Mellow\Api\Task\Response\DeclineTaskResponse;
 use Mellow\Api\Task\Response\PayTaskResponse;
@@ -66,7 +67,7 @@ class Task extends AbstractApi
 
         $response = $this->post($url, $parameters->toArray());
 
-        return $this->responseConverter->convert($response, TaskResponse::class);
+        return $this->responseConverter->convert($response, AcceptTaskResponse::class);
     }
 
     /**
