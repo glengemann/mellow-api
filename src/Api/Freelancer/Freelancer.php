@@ -8,6 +8,8 @@ use Mellow\Api\AbstractApi;
 use Mellow\Api\Freelancer\Parameter\FreelancerListParameters;
 use Mellow\Api\Freelancer\Parameter\InviteParameters;
 use Mellow\Api\Freelancer\Parameter\RemoveParameters;
+use Mellow\Api\Freelancer\Response\FreelancerCollectionResponse;
+use Mellow\Api\Freelancer\Response\FreelancerListPaginationResponse;
 use Mellow\Api\Freelancer\Response\FreelancerListResponse;
 use Mellow\Api\Freelancer\Response\InviteResponse;
 use Mellow\Api\Freelancer\Response\RemoveResponse;
@@ -43,7 +45,14 @@ class Freelancer extends AbstractApi
         $response = $response->getBody()->getContents();
         $response = json_decode($response, true);
 
-        return array_map(fn ($item) => new FreelancerListResponse(...$item), $response['items'] ?? []);
+        $items = array_map(
+            fn ($item) => new FreelancerListResponse(...$item),
+            $response['items'] ?? []
+        );
+
+        $pagination = new FreelancerListPaginationResponse(...$response['pagination']);
+
+        return new FreelancerCollectionResponse($items, $pagination);
     }
 
     /**
