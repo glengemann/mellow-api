@@ -65,10 +65,12 @@ class Client
         return new Webhook($this);
     }
 
-    public function authenticate(string $apiKey): void
+    public function authenticate(string $apiKey): AuthenticationPlugin
     {
         $authentication = new AuthenticationPlugin($apiKey);
         $this->httpClientBuilder->addPlugin($authentication);
+
+        return $authentication;
     }
 
     public function setCompany(int $companyId): void

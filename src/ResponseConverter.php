@@ -46,7 +46,6 @@ class ResponseConverter
                 $statusCode,
                 $response->getHeaders(),
                 $payload,
-                $raw
             );
             throw new \RuntimeException(sprintf('[%d] %s', $statusCode, $error));
         }

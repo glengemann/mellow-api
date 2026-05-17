@@ -11,8 +11,13 @@ use Psr\Http\Message\RequestInterface;
 class AuthenticationPlugin implements Plugin
 {
     public function __construct(
-        private readonly string $apiKey,
+        private string $apiKey,
     ) {
+    }
+
+    public function updateToken(string $apiKey): void
+    {
+        $this->apiKey = $apiKey;
     }
 
     public function handleRequest(
