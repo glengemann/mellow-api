@@ -10,6 +10,7 @@ use Mellow\Api\Freelancer\Freelancer;
 use Mellow\Api\Login\Login;
 use Mellow\Api\Lookup\Lookup;
 use Mellow\Api\Task\Task;
+use Mellow\Api\Transaction\Transaction;
 use Mellow\Api\Webhook\Webhook;
 use Mellow\HttpClient\Builder;
 use Mellow\HttpClient\Plugin\AuthenticationPlugin;
@@ -58,6 +59,12 @@ class Client
     public function lookup(): Lookup
     {
         return new Lookup($this);
+    }
+
+
+    public function transaction(): Transaction
+    {
+        return new Transaction($this);
     }
 
     public function webhook(): Webhook

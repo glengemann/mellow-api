@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace Mellow;
 
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AttributeLoader;
 use Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -16,17 +22,26 @@ class ResponseConverter
 {
     private readonly Serializer $serializer;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?Serializer $serializer = null,
+    ) {
+        $propertyInfo = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
         $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
         $nameConverter = new MetadataAwareNameConverter($classMetadataFactory);
 
         $normalizers = [
+            new DateTimeNormalizer([
+                DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
+            ]),
+            new BackedEnumNormalizer(),
+            new ObjectNormalizer($classMetadataFactory, $nameConverter, null, $propertyInfo),
             new ArrayDenormalizer(),
-            new ObjectNormalizer($classMetadataFactory, $nameConverter),
         ];
 
-        $this->serializer = $serializer ?? new Serializer($normalizers);
+        $this->serializer = $serializer ?? new Serializer(
+            $normalizers,
+            [new JsonEncoder()],
+        );
     }
 
     /**

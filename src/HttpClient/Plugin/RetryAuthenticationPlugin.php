@@ -41,7 +41,7 @@ class RetryAuthenticationPlugin implements Plugin
                 $newToken = $this->reAuthenticate();
                 $this->authPlugin->updateToken($newToken);
 
-                return $first($request);
+                return $first($request)->wait();
             });
     }
 
