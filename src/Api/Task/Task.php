@@ -14,6 +14,7 @@ use Mellow\Api\Task\Response\AcceptTaskResponse;
 use Mellow\Api\Task\Response\CreateTaskResponse;
 use Mellow\Api\Task\Response\DeclineTaskResponse;
 use Mellow\Api\Task\Response\PayTaskResponse;
+use Mellow\Api\Task\Response\TaskCollectionResponse;
 use Mellow\Api\Task\Response\TaskResponse;
 
 class Task extends AbstractApi
@@ -31,7 +32,7 @@ class Task extends AbstractApi
 
         $response = $this->get($url);
 
-        return $this->responseConverter->convert($response, TaskResponse::class . '[]');
+        return $this->responseConverter->convert($response, TaskCollectionResponse::class);
     }
 
     /**
