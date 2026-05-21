@@ -65,8 +65,6 @@ class ResponseConverter
             throw new \RuntimeException(sprintf('[%d] %s', $statusCode, $error));
         }
 
-        $payload = $payload['items'] ?? $payload;
-
         return $this->serializer->denormalize($payload, $type);
     }
 
@@ -112,6 +110,7 @@ class ResponseConverter
             ?? $payload['error']
             ?? $payload['message']
             ?? $payload['uuid']
+            ?? $payload['price']
             ?? 'Unknown error';
     }
 }
