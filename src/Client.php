@@ -9,6 +9,7 @@ use Mellow\Api\Company\Company;
 use Mellow\Api\Freelancer\Freelancer;
 use Mellow\Api\Login\Login;
 use Mellow\Api\Lookup\Lookup;
+use Mellow\Api\Profile\Profile;
 use Mellow\Api\Task\Task;
 use Mellow\Api\Transaction\Transaction;
 use Mellow\Api\Webhook\Webhook;
@@ -41,6 +42,11 @@ class Client
         return new Login($this);
     }
 
+    public function profile(): Profile
+    {
+        return new Profile($this);
+    }
+
     public function company(): Company
     {
         return new Company($this);
@@ -60,7 +66,6 @@ class Client
     {
         return new Lookup($this);
     }
-
 
     public function transaction(): Transaction
     {
