@@ -8,7 +8,7 @@ class TwoFactorEnabledResponse implements LoginResponse
 {
     public function __construct(
         public readonly string $type,
-        public readonly string $number,
+        public readonly ?string $number,
     ) {
     }
 
