@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow;
 
+use Mellow\Api\Login\Response\LoginResponseDenormalizer;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
@@ -30,6 +31,7 @@ class ResponseConverter
         $nameConverter = new MetadataAwareNameConverter($classMetadataFactory);
 
         $normalizers = [
+            new LoginResponseDenormalizer(),
             new DateTimeNormalizer([
                 DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
             ]),

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mellow\Api\Login;
 
 use Mellow\Api\AbstractApi;
-use Mellow\Api\Login\Response\Credential;
+use Mellow\Api\Login\Response\LoginResponse;
 
 class Login extends AbstractApi
 {
@@ -23,7 +23,7 @@ class Login extends AbstractApi
             'code' => $code,
         ]);
 
-        return $this->responseConverter->convert($response, Credential::class);
+        return $this->responseConverter->convert($response, LoginResponse::class);
     }
 
     public function refresh(string $refreshToken)
@@ -34,6 +34,6 @@ class Login extends AbstractApi
             'refreshToken' => $refreshToken,
         ]);
 
-        return $this->responseConverter->convert($response, Credential::class);
+        return $this->responseConverter->convert($response, LoginResponse::class);
     }
 }
