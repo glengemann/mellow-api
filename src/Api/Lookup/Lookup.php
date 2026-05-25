@@ -8,12 +8,11 @@ use Mellow\Api\AbstractApi;
 use Mellow\Api\Lookup\Parameter\ServiceAttributesParameters;
 use Mellow\Api\Lookup\Response\ServiceAttributeResponse;
 use Mellow\Api\Lookup\Response\ServiceCollectionResponse;
-use Mellow\Api\Lookup\Response\ServiceResponse;
 
 class Lookup extends AbstractApi
 {
-    /** @return ServiceResponse[] */
-    public function services(ServiceAttributesParameters $parameters): array
+    /** @return ServiceCollectionResponse */
+    public function services(ServiceAttributesParameters $parameters)
     {
         $url = 'customer/lookups/services';
 
