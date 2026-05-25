@@ -7,6 +7,7 @@ namespace Mellow\Api\Lookup;
 use Mellow\Api\AbstractApi;
 use Mellow\Api\Lookup\Parameter\ServiceAttributesParameters;
 use Mellow\Api\Lookup\Response\ServiceAttributeResponse;
+use Mellow\Api\Lookup\Response\ServiceCollectionResponse;
 use Mellow\Api\Lookup\Response\ServiceResponse;
 
 class Lookup extends AbstractApi
@@ -22,7 +23,7 @@ class Lookup extends AbstractApi
 
         $response = $this->get($url);
 
-        return $this->responseConverter->convert($response, ServiceResponse::class . '[]');
+        return $this->responseConverter->convert($response, ServiceCollectionResponse::class);
     }
 
     public function serviceAttributes(): array
