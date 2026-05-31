@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Mellow\Api\Freelancer\Response;
 
-class FreelancerCollectionResponse
+final class FreelancerCollectionResponse
 {
     /**
-     * @param FreelancerListResponse[] $items
+     * @param FreelancerResponse[] $items
      */
     public function __construct(
         public readonly array $items,
-        public readonly FreelancerListPaginationResponse $pagination,
+        public readonly FreelancerPaginationResponse $pagination,
     ) {
     }
 }

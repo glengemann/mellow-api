@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Api\Freelancer\Response;
 
-class FreelancerListResponse
+final class FreelancerResponse
 {
     public function __construct(
         public readonly int $id,
@@ -19,7 +19,7 @@ class FreelancerListResponse
         public readonly bool $isVerified,
         public readonly ?string $country,
         public readonly bool $isInviteSent,
-        public readonly ?string $inviteSentAt,
+        public readonly ?\DateTimeImmutable $inviteSentAt,
         public readonly ?string $actualRegDate,
         public readonly ?string $dateVerified,
         public readonly bool $isRegistered,

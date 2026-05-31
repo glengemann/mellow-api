@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Api\Freelancer\Response;
 
-class FreelancerListPaginationResponse
+final class FreelancerPaginationResponse
 {
     public function __construct(
         public readonly int $count,
