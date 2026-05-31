@@ -13,22 +13,27 @@ class Login extends AbstractApi
         string $user,
         #[\SensitiveParameter]
         string $password,
-        int $code = 0,
+        ?int $code = null,
     ) {
         $url = 'login';
 
-        $response = $this->post($url, [
+        $body = [
             'username' => $user,
             'password' => $password,
-            'code' => $code,
-        ]);
+        ];
+
+        if (null !== $code) {
+            $body['code'] = (string) $code;
+        }
+
+        $response = $this->post($url, $body);
 
         return $this->responseConverter->convert($response, LoginResponse::class);
     }
 
     public function refresh(string $refreshToken)
     {
-        $url = 'refresh';
+        $url = 'token/refresh';
 
         $response = $this->post($url, [
             'refreshToken' => $refreshToken,
