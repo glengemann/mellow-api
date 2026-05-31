@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mellow\Tests\Api\Freelancer;
 
 use Mellow\Api\Freelancer\Freelancer;
+use Mellow\Api\Freelancer\Parameter\InviteParameters;
 use Mellow\Api\Freelancer\Parameter\RemoveParameters;
 use Mellow\Client;
 use Mellow\ResponseConverter;
@@ -25,11 +26,26 @@ class FreelancerTest extends TestCase
         $client = Client::createWithHttpClient($clientHttp);
 
         $converter = $this->createStub(ResponseConverter::class);
+        $converter->method('convert')->willReturn([]);
 
         $this->api = $this->getMockBuilder(Freelancer::class)
-            ->onlyMethods(['delete'])
+            ->onlyMethods(['delete', 'post'])
             ->setConstructorArgs([$client, $converter])
             ->getMock();
+    }
+
+    public function testInvite(): void
+    {
+        $this->api->expects($this->once())
+            ->method('post')
+            ->with('customer/freelancers', [
+                'email' => 'test@example.com',
+            ]);
+
+        $parameters = (new InviteParameters())
+            ->email('test@example.com');
+
+        $this->api->invite($parameters);
     }
 
     public function testRemove(): void

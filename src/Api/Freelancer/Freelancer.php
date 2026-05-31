@@ -23,7 +23,7 @@ class Freelancer extends AbstractApi
      */
     public function invite(InviteParameters $parameters): object|array
     {
-        $url = sprintf('customer/freelancers');
+        $url = 'customer/freelancers';
 
         $response = $this->post($url, $parameters->toArray());
 
