@@ -60,7 +60,7 @@ class Freelancer extends AbstractApi
      */
     public function remove(RemoveParameters $parameters)
     {
-        $url = sprintf('customer/freelancers');
+        $url = 'customer/freelancers';
 
         $response = $this->delete($url, $parameters->toArray());
 
