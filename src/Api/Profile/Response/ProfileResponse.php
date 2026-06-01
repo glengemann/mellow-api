@@ -13,8 +13,7 @@ final readonly class ProfileResponse
         public ?string $inn,
         public string $ip,
         public ?string $birthDate,
-        /** @var array<string, mixed>|null */
-        public ?array $gridsSettings,
+        public string $gridsSettings,
         public bool $loginNotification,
         public ?int $avatarFileId,
         public ?string $avatarFileUrl,

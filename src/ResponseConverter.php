@@ -113,6 +113,7 @@ class ResponseConverter
             ?? $payload['message']
             ?? $payload['uuid']
             ?? $payload['price']
+            ?? $payload['workerId']
             ?? 'Unknown error';
     }
 }
