@@ -65,9 +65,17 @@ class FreelancerTest extends TestCase
                     ->isInviteEmailSent(false)
                     ->dateInvitedFrom(new \DateTimeImmutable('2026-05-01'))
                     ->dateInvitedTo(new \DateTimeImmutable('2026-05-31'))
-            )
-        ;
+            );
         $this->api->list($parameters);
+    }
+
+    public function testFindByEmail(): void
+    {
+        $this->api->expects($this->once())
+            ->method('get')
+            ->with('customer/freelancer-by-email/test@example.com');
+
+        $this->api->findByEmail('test@example.com');
     }
 
     public function testRemove(): void

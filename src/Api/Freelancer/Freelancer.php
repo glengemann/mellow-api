@@ -9,6 +9,7 @@ use Mellow\Api\Freelancer\Parameter\FreelancerListParameters;
 use Mellow\Api\Freelancer\Parameter\InviteParameters;
 use Mellow\Api\Freelancer\Parameter\RemoveParameters;
 use Mellow\Api\Freelancer\Response\FreelancerCollectionResponse;
+use Mellow\Api\Freelancer\Response\FreelancerResponse;
 use Mellow\Api\Freelancer\Response\InviteResponse;
 use Mellow\Api\Freelancer\Response\RemoveResponse;
 
@@ -42,6 +43,18 @@ class Freelancer extends AbstractApi
         $response = $this->get($url);
 
         return $this->responseConverter->convert($response, FreelancerCollectionResponse::class);
+    }
+
+    /**
+     * @see https://my.mellow.io/api/docs/#finding-freelancers-by-email
+     */
+    public function findByEmail(string $email)
+    {
+        $url = sprintf('customer/freelancer-by-email/%s', $email);
+
+        $response = $this->get($url);
+
+        return $this->responseConverter->convert($response, FreelancerResponse::class);
     }
 
     /**
