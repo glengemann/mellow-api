@@ -10,6 +10,7 @@ use Mellow\Api\Task\Parameter\CreateParameters;
 use Mellow\Api\Task\Parameter\DeclineTaskParameters;
 use Mellow\Api\Task\Parameter\FilterParameters;
 use Mellow\Api\Task\Parameter\PayTaskParameters;
+use Mellow\Api\Task\Parameter\ResumeTaskParameters;
 use Mellow\Api\Task\Response\AcceptTaskResponse;
 use Mellow\Api\Task\Response\CreateTaskResponse;
 use Mellow\Api\Task\Response\DeclineTaskResponse;
@@ -93,5 +94,17 @@ class Task extends AbstractApi
         $response = $this->post($url, $parameters->toArray());
 
         return $this->responseConverter->convert($response, PayTaskResponse::class);
+    }
+
+    /**
+     * @see https://my.mellow.io/api/docs/#resume-task
+     */
+    public function resume(ResumeTaskParameters $parameters)
+    {
+        $url = 'customer/tasks/return-to-work';
+
+        $response = $this->post($url, $parameters->toArray());
+
+        return $this->responseConverter->convert($response, ResumeTaskResponse::class);
     }
 }
