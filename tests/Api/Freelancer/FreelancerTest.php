@@ -78,6 +78,15 @@ class FreelancerTest extends TestCase
         $this->api->findByEmail('test@example.com');
     }
 
+    public function testRetrieve(): void
+    {
+        $this->api->expects($this->once())
+            ->method('get')
+            ->with('customer/freelancers/1');
+
+        $this->api->retrieve(1);
+    }
+
     public function testRemove(): void
     {
         $this->api->expects($this->once())

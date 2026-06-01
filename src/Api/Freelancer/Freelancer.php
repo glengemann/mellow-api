@@ -58,6 +58,18 @@ class Freelancer extends AbstractApi
     }
 
     /**
+     * @see https://my.mellow.io/api/docs/#retrieving-freelancer-details
+     */
+    public function retrieve(string|int $freelancerId)
+    {
+        $url = sprintf('customer/freelancers/%s', $freelancerId);
+
+        $response = $this->get($url);
+
+        return $this->responseConverter->convert($response, FreelancerResponse::class);
+    }
+
+    /**
      * @see https://my.mellow.io/api/docs/#removing-freelancers-from-team
      */
     public function remove(RemoveParameters $parameters)
