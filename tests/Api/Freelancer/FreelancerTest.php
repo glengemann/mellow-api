@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mellow\Tests\Api\Freelancer;
 
 use Mellow\Api\Freelancer\Freelancer;
+use Mellow\Api\Freelancer\Parameter\FreelancerFilter;
 use Mellow\Api\Freelancer\Parameter\FreelancerListParameters;
 use Mellow\Api\Freelancer\Parameter\InviteParameters;
 use Mellow\Api\Freelancer\Parameter\RemoveParameters;
@@ -53,11 +54,19 @@ class FreelancerTest extends TestCase
     {
         $this->api->expects($this->once())
             ->method('get')
-            ->with('customer/freelancers?page=2&size=25');
+            ->with('customer/freelancers?page=2&size=25&filter%5BisVerified%5D=1&filter%5BisInviteEmailSent%5D=0&filter%5BdateInvitedFrom%5D=2026-05-01&filter%5BdateInvitedTo%5D=2026-05-31');
 
         $parameters = (new FreelancerListParameters())
             ->page(2)
-            ->size(25);
+            ->size(25)
+            ->filter(
+                (new FreelancerFilter())
+                    ->isVerified(true)
+                    ->isInviteEmailSent(false)
+                    ->dateInvitedFrom(new \DateTimeImmutable('2026-05-01'))
+                    ->dateInvitedTo(new \DateTimeImmutable('2026-05-31'))
+            )
+        ;
         $this->api->list($parameters);
     }
 
