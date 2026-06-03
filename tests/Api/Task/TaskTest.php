@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Tests\Api\Task;
 
+use Mellow\Api\Task\Parameter\PublishDraftParameters;
 use Mellow\Api\Task\Parameter\ResumeTaskParameters;
 use Mellow\Api\Task\Task;
 use Mellow\Client;
@@ -43,5 +44,21 @@ class TaskTest extends TestCase
         $parameters = (new ResumeTaskParameters())
             ->taskId(1);
         $this->api->resume($parameters);
+    }
+
+    public function testPublish(): void
+    {
+        $this->api->expects($this->once())
+            ->method('post')
+            ->with('customer/tasks/publish-draft', [
+                'taskId' => 1,
+                'companyId' => 2,
+            ]);
+
+        $parameters = (new PublishDraftParameters())
+            ->taskId(1)
+            ->companyId(2);
+
+        $this->api->publish($parameters);
     }
 }
