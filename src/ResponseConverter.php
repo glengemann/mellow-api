@@ -114,6 +114,6 @@ class ResponseConverter
             ?? $payload['uuid']
             ?? $payload['price']
             ?? $payload['workerId']
-            ?? 'Unknown error';
+            ?? json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 }
