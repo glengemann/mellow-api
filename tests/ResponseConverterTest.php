@@ -48,6 +48,17 @@ class ResponseConverterTest extends TestCase
             '{"workerId": "Worker with id 1166115 not found"}',
             '[422] Worker with id 1166115 not found',
         ];
+
+        yield [
+            404,
+            <<<JSON
+            {
+              "error": "TaskItemView with ID 1fd50d9d-d85d-4aad-a025-5f106bd068ca was not found",
+              "code": 0
+            }
+            JSON,
+            '[404] TaskItemView with ID 1fd50d9d-d85d-4aad-a025-5f106bd068ca was not found',
+        ];
     }
 
     protected function setUp(): void
