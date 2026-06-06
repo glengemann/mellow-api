@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mellow;
 
 use Mellow\Api\Login\Response\LoginResponseDenormalizer;
+use Mellow\Exception\ApiExceptionFactory;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
@@ -22,10 +23,14 @@ use Symfony\Component\Serializer\Serializer;
 class ResponseConverter
 {
     private readonly Serializer $serializer;
+    private readonly ApiExceptionFactory $apiExceptionFactory;
 
     public function __construct(
         ?Serializer $serializer = null,
+        ?ApiExceptionFactory $apiExceptionFactory = null,
     ) {
+        $this->apiExceptionFactory = $apiExceptionFactory ?? new ApiExceptionFactory();
+
         $propertyInfo = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
         $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
         $nameConverter = new MetadataAwareNameConverter($classMetadataFactory);
@@ -59,12 +64,11 @@ class ResponseConverter
         $payload = $this->decodePayload($raw);
 
         if ($statusCode < 200 || $statusCode >= 300) {
-            $error = $this->resolveErrorMessage(
+            throw $this->apiExceptionFactory->fromResponse(
                 $statusCode,
-                $response->getHeaders(),
                 $payload,
+                $response->getHeaders(),
             );
-            throw new \RuntimeException(sprintf('[%d] %s', $statusCode, $error));
         }
 
         return $this->serializer->denormalize($payload, $type);
@@ -86,34 +90,5 @@ class ResponseConverter
         }
 
         return true === is_array($decoded) ? $decoded : [];
-    }
-
-    /**
-     * @param array<string, array<int, string>> $headers
-     * @param array<string, mixed> $payload
-     */
-    private function resolveErrorMessage(
-        int $statusCode,
-        array $headers,
-        array $payload,
-    ): string {
-        if (429 === $statusCode) {
-            $retryAfterHeader = $headers['retry-after'][0] ?? null;
-
-            if (null !== $retryAfterHeader) {
-                return sprintf('Rate limit exceeded. Retry in %d seconds.', $retryAfterHeader);
-            }
-
-            return 'Rate limit exceeded. Retry later.';
-        }
-
-        return $payload['email']
-            ?? $payload['taskId']
-            ?? $payload['error']
-            ?? $payload['message']
-            ?? $payload['uuid']
-            ?? $payload['price']
-            ?? $payload['workerId']
-            ?? json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 }
