@@ -9,7 +9,7 @@ use Mellow\Exception\ValidationException;
 
 class ValidationExceptionHandler implements ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool
+    public function supports(int $statusCode): bool
     {
         return 422 === $statusCode;
     }

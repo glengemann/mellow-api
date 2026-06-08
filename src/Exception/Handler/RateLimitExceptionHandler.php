@@ -9,7 +9,7 @@ use Mellow\Exception\RateLimitException;
 
 class RateLimitExceptionHandler implements ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool
+    public function supports(int $statusCode): bool
     {
         return 429 === $statusCode;
     }

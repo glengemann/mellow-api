@@ -9,7 +9,7 @@ use Mellow\Exception\UnauthorizedException;
 
 class UnauthorizedExceptionHandler implements ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool
+    public function supports(int $statusCode): bool
     {
         return 401 === $statusCode;
     }

@@ -9,7 +9,7 @@ use Mellow\Exception\ServerException;
 
 class ServerExceptionHandler implements ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool
+    public function supports(int $statusCode): bool
     {
         return 500 <= $statusCode;
     }

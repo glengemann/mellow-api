@@ -9,7 +9,7 @@ use Mellow\Exception\NotFoundException;
 
 class NotFoundExceptionHandler implements ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool
+    public function supports(int $statusCode): bool
     {
         return 404 === $statusCode;
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Exception;
 
-class RateLimitException extends ClientException
+final class RateLimitException extends ClientException
 {
     public function __construct(
         private readonly ?int $retryAfter,

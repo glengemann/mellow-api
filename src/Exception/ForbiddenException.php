@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Exception;
 
-class ForbiddenException extends ClientException
+final class ForbiddenException extends ClientException
 {
     public function __construct(
         private readonly ?string $error,

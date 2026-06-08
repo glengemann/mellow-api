@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(NotFoundExceptionHandler::class)]
+#[CoversClass(ForbiddenExceptionHandler::class)]
 class ForbiddenExceptionHandlerTest extends TestCase
 {
     private ForbiddenExceptionHandler $handler;

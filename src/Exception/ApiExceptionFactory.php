@@ -18,15 +18,16 @@ class ApiExceptionFactory
     private array $handers = [];
 
     public function __construct(
-        ?array $handers = null,
+        ?array $additionalHandlers = [],
     ) {
-        $this->handers = $handers ?? [
+        $this->handers = [
+            ...$additionalHandlers,
             new UnauthorizedExceptionHandler(),
+            new ForbiddenExceptionHandler(),
+            new NotFoundExceptionHandler(),
             new ValidationExceptionHandler(),
             new RateLimitExceptionHandler(),
-            new NotFoundExceptionHandler(),
             new ServerExceptionHandler(),
-            new ForbiddenExceptionHandler(),
         ];
     }
 
@@ -36,7 +37,7 @@ class ApiExceptionFactory
         array $headers,
     ): ApiException {
         foreach ($this->handers as $handler) {
-            if ($handler->support($statusCode)) {
+            if ($handler->supports($statusCode)) {
                 return $handler->handle($statusCode, $payload, $headers);
             }
         }

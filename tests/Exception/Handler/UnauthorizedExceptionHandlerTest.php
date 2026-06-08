@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Mellow\Tests\Exception\Handler;
 
-use Mellow\Exception\Handler\NotFoundExceptionHandler;
 use Mellow\Exception\Handler\UnauthorizedExceptionHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(NotFoundExceptionHandler::class)]
+#[CoversClass(UnauthorizedExceptionHandler::class)]
 class UnauthorizedExceptionHandlerTest extends TestCase
 {
     private UnauthorizedExceptionHandler $handler;

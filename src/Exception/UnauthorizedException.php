@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Exception;
 
-class UnauthorizedException extends ClientException
+final class UnauthorizedException extends ClientException
 {
     public function __construct(
         private readonly string $error,

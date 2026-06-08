@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Exception;
 
-class ValidationException extends ClientException
+final class ValidationException extends ClientException
 {
     public function __construct(
         private readonly array $errors,

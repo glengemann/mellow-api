@@ -8,7 +8,7 @@ use Mellow\Exception\ApiException;
 
 interface ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool;
+    public function supports(int $statusCode): bool;
 
     public function handle(int $statusCode, array $payload, array $headers): ApiException;
 }

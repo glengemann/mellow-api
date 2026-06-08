@@ -9,7 +9,7 @@ use Mellow\Exception\ForbiddenException;
 
 class ForbiddenExceptionHandler implements ExceptionHandlerInterface
 {
-    public function support(int $statusCode): bool
+    public function supports(int $statusCode): bool
     {
         return 403 === $statusCode;
     }
