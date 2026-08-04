@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Mellow\Api\Company;
 
 use Mellow\Api\AbstractApi;
-use Mellow\Api\Company\Parameter\SetAddressParameters;
+use Mellow\Api\Company\Parameter\OperatingAddressParameters;
 use Mellow\Api\Company\Response\BalanceResponse;
 use Mellow\Api\Company\Response\CompanyCollectionResponse;
 use Mellow\Api\Company\Response\DefaultResponse;
-use Mellow\Api\Company\Response\SetAddressResponse;
+use Mellow\Api\Company\Response\OperatingAddressResponse;
 
 class Company extends AbstractApi
 {
@@ -52,12 +52,12 @@ class Company extends AbstractApi
     /**
      * @see https://my.mellow.io/api/docs/#company--setting-company-operating-address
      */
-    public function setAddress(SetAddressParameters $parameters): SetAddressResponse
+    public function setOperatingAddress(OperatingAddressParameters $parameters): OperatingAddressResponse
     {
         $url = 'customer/companies/operating-address';
 
         $response = $this->post($url, $parameters->toArray());
 
-        return $this->responseConverter->convert($response, SetAddressResponse::class);
+        return $this->responseConverter->convert($response, OperatingAddressResponse::class);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Api\Company\Parameter;
 
-class SetAddressParameters
+class OperatingAddressParameters
 {
     public function __construct(
         private array $parameters = [],

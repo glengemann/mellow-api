@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Mellow\Tests\Api\Company\Parameter;
 
-use Mellow\Api\Company\Parameter\SetAddressParameters;
+use Mellow\Api\Company\Parameter\OperatingAddressParameters;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(SetAddressParameters::class)]
+#[CoversClass(OperatingAddressParameters::class)]
 class SetAddressParametersTest extends TestCase
 {
-    private SetAddressParameters $parameters;
+    private OperatingAddressParameters $parameters;
 
     protected function setUp(): void
     {
-        $this->parameters = new SetAddressParameters();
+        $this->parameters = new OperatingAddressParameters();
     }
 
     public function testToArray(): void

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mellow\Tests\Api\Company;
 
 use Mellow\Api\Company\Company;
-use Mellow\Api\Company\Parameter\SetAddressParameters;
+use Mellow\Api\Company\Parameter\OperatingAddressParameters;
 use Mellow\Client;
 use Mellow\ResponseConverter;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -64,14 +64,14 @@ class CompanyTest extends TestCase
         $this->api->balance();
     }
 
-    public function testSetAddress(): void
+    public function testSetOperatingAddress(): void
     {
         $this->api->expects($this->once())
             ->method('post')
             ->with('customer/companies/operating-address');
 
-        $parameters = (new SetAddressParameters());
+        $parameters = (new OperatingAddressParameters());
 
-        $this->api->setAddress($parameters);
+        $this->api->setOperatingAddress($parameters);
     }
 }
