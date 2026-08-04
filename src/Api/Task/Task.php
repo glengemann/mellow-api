@@ -64,6 +64,8 @@ class Task extends AbstractApi
 
     /**
      * @see https://my.mellow.io/api/docs/#accepting-task
+     *
+     * @throw ApiException
      */
     public function accept(AcceptTaskParameters $parameters)
     {

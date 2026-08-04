@@ -52,12 +52,14 @@ class ResponseConverter
     }
 
     /**
-     * @return array|object
+     * @template T of object
+     * @param class-string<T> $type
+     * @return T
      */
     public function convert(
         ResponseInterface $response,
         string $type,
-    ) {
+    ): object {
         $raw = $response->getBody()->getContents();
         $statusCode = $response->getStatusCode();
 
