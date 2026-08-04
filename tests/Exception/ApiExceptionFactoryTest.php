@@ -22,16 +22,16 @@ class ApiExceptionFactoryTest extends TestCase
     public function testCreateUnauthorizedException(): void
     {
         $actual = $this->factory->fromResponse(
-            409,
+            408,
             [
-                'error' => 'Country must be specified to sign the agreement.',
+                'error' => 'An error occurred.',
                 'code' => 52,
             ],
             [],
         );
 
         $this->assertEquals(ClientException::class, $actual::class);
-        $this->assertEquals('Country must be specified to sign the agreement.', $actual->getMessage());
-        $this->assertEquals(409, $actual->getCode());
+        $this->assertEquals('An error occurred.', $actual->getMessage());
+        $this->assertEquals(408, $actual->getCode());
     }
 }
