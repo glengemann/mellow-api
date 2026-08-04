@@ -7,15 +7,10 @@ namespace Mellow\Exception;
 final class UnauthorizedException extends ClientException
 {
     public function __construct(
-        private readonly string $error,
+        string $message,
         int $code = 401,
         ?\Throwable $previous = null,
     ) {
-        parent::__construct('Unauthorized', $code, $previous);
-    }
-
-    public function getError(): string
-    {
-        return $this->error;
+        parent::__construct($message, $code, $previous);
     }
 }

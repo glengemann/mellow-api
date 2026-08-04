@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mellow\Exception;
 
+use Mellow\Exception\Handler\ConflictExceptionHandler;
 use Mellow\Exception\Handler\ExceptionHandlerInterface;
 use Mellow\Exception\Handler\ForbiddenExceptionHandler;
 use Mellow\Exception\Handler\NotFoundExceptionHandler;
@@ -25,6 +26,7 @@ class ApiExceptionFactory
             new UnauthorizedExceptionHandler(),
             new ForbiddenExceptionHandler(),
             new NotFoundExceptionHandler(),
+            new ConflictExceptionHandler(),
             new ValidationExceptionHandler(),
             new RateLimitExceptionHandler(),
             new ServerExceptionHandler(),

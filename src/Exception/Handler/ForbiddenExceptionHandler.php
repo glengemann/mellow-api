@@ -16,7 +16,7 @@ class ForbiddenExceptionHandler implements ExceptionHandlerInterface
 
     public function handle(int $statusCode, array $payload, array $headers): ApiException
     {
-        $error = $payload['error'] ?? null;
+        $error = $payload['error'] ?? 'Forbidden';
 
         return new ForbiddenException($error);
     }

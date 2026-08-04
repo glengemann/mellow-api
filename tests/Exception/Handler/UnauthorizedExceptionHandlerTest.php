@@ -27,7 +27,6 @@ class UnauthorizedExceptionHandlerTest extends TestCase
                 'error' => 'refresh_token_invalid',
                 'code' => 0,
             ],
-            'Unauthorized',
             'refresh_token_invalid',
         ];
     }
@@ -37,11 +36,9 @@ class UnauthorizedExceptionHandlerTest extends TestCase
         int $statusCode,
         array $body,
         string $expectedMessage,
-        string $expectedError,
     ): void {
         $actual = $this->handler->handle($statusCode, $body, []);
 
         $this->assertEquals($expectedMessage, $actual->getMessage());
-        $this->assertEquals($expectedError, $actual->getError());
     }
 }

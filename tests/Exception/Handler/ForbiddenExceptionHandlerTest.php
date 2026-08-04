@@ -28,7 +28,6 @@ class ForbiddenExceptionHandlerTest extends TestCase
             [
                 'error' => 'Access Denied.',
             ],
-            'Forbidden',
             'Access Denied.',
         ];
     }
@@ -38,11 +37,9 @@ class ForbiddenExceptionHandlerTest extends TestCase
         int $statusCode,
         array $body,
         string $expectedMessage,
-        string $expectedError,
     ): void {
         $actual = $this->handler->handle($statusCode, $body, []);
 
         $this->assertEquals($expectedMessage, $actual->getMessage());
-        $this->assertEquals($expectedError, $actual->getError());
     }
 }

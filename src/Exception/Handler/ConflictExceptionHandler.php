@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Mellow\Exception\Handler;
 
 use Mellow\Exception\ApiException;
-use Mellow\Exception\UnauthorizedException;
+use Mellow\Exception\ConflictException;
 
-class UnauthorizedExceptionHandler implements ExceptionHandlerInterface
+class ConflictExceptionHandler implements ExceptionHandlerInterface
 {
     public function supports(int $statusCode): bool
     {
-        return 401 === $statusCode;
+        return 409 === $statusCode;
     }
 
     public function handle(int $statusCode, array $payload, array $headers): ApiException
     {
-        $error = $payload['error'] ?? 'Unauthorized';
+        $error = $payload['error'] ?? 'Conflict';
 
-        return new UnauthorizedException($error);
+        return new ConflictException($error);
     }
 }
