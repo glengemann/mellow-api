@@ -15,6 +15,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 #[CoversClass(Freelancer::class)]
 class FreelancerTest extends TestCase
@@ -28,7 +29,10 @@ class FreelancerTest extends TestCase
         $client = Client::createWithHttpClient($clientHttp);
 
         $converter = $this->createStub(ResponseConverter::class);
-        $converter->method('convert')->willReturn([]);
+        $converter->method('convert')->willReturnCallback(
+            static fn (ResponseInterface $response, string $type): object => (new \ReflectionClass($type))
+                ->newInstanceWithoutConstructor()
+        );
 
         $this->api = $this->getMockBuilder(Freelancer::class)
             ->onlyMethods(['delete', 'post', 'get'])

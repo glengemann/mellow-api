@@ -47,7 +47,6 @@ class FreelancerListParametersTest extends TestCase
 
     public function testToArrayWithDefaults(): void
     {
-        $expected = [];
-        $this->assertEquals($expected, $this->parameters->toArray());
+        $this->assertEquals([], $this->parameters->toArray());
     }
 }

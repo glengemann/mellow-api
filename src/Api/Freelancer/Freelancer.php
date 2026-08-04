@@ -17,10 +17,8 @@ class Freelancer extends AbstractApi
 {
     /**
      * @see https://my.mellow.io/api/docs/#inviting-freelancer
-     *
-     * @return InviteResponse
      */
-    public function invite(InviteParameters $parameters): object|array
+    public function invite(InviteParameters $parameters): InviteResponse
     {
         $url = 'customer/freelancers';
 
